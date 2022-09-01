@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./iconfont.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <script src="./music.js"></script>
+  </head>
+  <body>
+    <!-- 头部 -->
+    <header></header>
+
+    <!-- 主体 -->
+    <div class="container">
+      <div class="music-list"></div>
+    </div>
+
+    <!-- 尾部 -->
+    <footer>
+      <div class="menu">
+        <!-- 播放,前一首,后一首 -->
+        <div class="btn_list">
+          <i class="iconfont icon-xuanzeqixiayige_o"></i>
+          <i class="iconfont icon-24gl-play" id="start"></i>
+          <i class="iconfont icon-bofang" id="pause"></i>
+          <i class="iconfont icon-xuanzeqixiayige_o"></i>
+        </div>
+
+        <!-- 播放器 -->
+        <div class="player">
+          <!-- 封面图 -->
+          <div class="pic">
+            <img src="img/cover.png" alt="" srcset="" />
+          </div>
+
+          <!-- 进度条 -->
+          <div class="process-bar"></div>
+          <!-- 开始时间 -->
+          <div class="start-time">1:20</div>
+          <!-- 切歌,收藏 -->
+          <div class="switch">
+            <i class="iconfont icon-shoucang"></i>
+            <i class="iconfont icon-24gl-repeat2" id="switch"></i>
+          </div>
+          <!-- 结束时间 -->
+          <div class="end-time">3:00</div>
+          <!-- 副标题 -->
+          <div class="sub-title">--</div>
+          <!-- 主标题 -->
+          <div class="title">--</div>
+
+          <!-- 声音和列表的图标 -->
+          <div class="item">
+            <i class="iconfont icon-24gl-playlistMusic3"></i>
+            <i class="iconfont icon-24gl-volumeCross"></i>
+          </div>
+
+          <!-- 音量条 -->
+          <div class="volumeController"></div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script type="module">
+    let pause = document.querySelector("#pause");
+    let start = document.querySelector("#start");
+    console.log(musicJSON)
+
+    //暂停音乐
+    pause.addEventListener("click", () => {
+      pause.style.display = `none`;
+      start.style.display = "inline-block";
+    });
+
+    //播放音乐
+    start.addEventListener("click", () => {
+      start.style.display = `none`;
+      pause.style.display = "inline-block";
+    });
+
+    //添加列表项
+    let musicList = document.querySelector(".music-list");
+
+    for (let i = 0; i < musicJSON.currentPlaying.length; i++) {
+      document.createElement("div");
+      musicList.innerHTML += `<div class="music-item">
+          <div class="name">${musicJSON.currentPlaying[i].title}</div>
+          <div class="singer">${musicJSON.currentPlaying[i].artist}</div>
+          <div class="album"></div>
+          <div class="tools">
+            <i class="iconfont icon-tianjia"></i>
+            <i class="iconfont icon-shanchu"></i>
+            <i class="iconfont icon-shoucang"></i>
+          </div>`;
+    }
+
+    //切歌播放模式的图标改变
+    let switcher = document.getElementById("switch");
+    let playArr = [
+      "iconfont icon-24gl-repeat2",
+      "iconfont icon-danqubofang",
+      "iconfont icon-suijibofang",
+      "iconfont icon-24gl-repeat2",
+    ];
+
+    switcher.addEventListener("click", () => {
+      for (let i = 0; i < 4; i++) {
+        if (switcher.className == playArr[i]) {
+          switcher.className = playArr[i + 1];
+          return;
+        }
+      }
+    });
+
+    //点击播放音乐
+    let title=document.querySelector('.title')
+    let artist=document.querySelector('.sub-title')
+    let pic=document.querySelector('.pic')
+    let musicItem = document.querySelectorAll(".music-item");
+    musicItem.forEach((e, i) => {
+      musicItem[i].addEventListener("click", () => {
+        // //歌名
+        // console.log(musicJSON.currentPlaying[i].title)
+        title.innerHTML=musicJSON.currentPlaying[i].title
+        // //歌手名
+        // console.log(musicJSON.currentPlaying[i].artist)
+        artist.innerHTML=musicJSON.currentPlaying[i].artist
+        //图片链接
+        // musicJSON.currentPlaying[i].img_url
+        pic.innerHTML=` <img src="${musicJSON.currentPlaying[i].img_url}" alt="" srcset="" />`
+        // //资源链接
+        // console.log(musicJSON.currentPlaying[i].source_url)
+      });
+    });
+  </script>
+</html>
