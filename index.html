@@ -134,7 +134,7 @@
         // musicJSON.currentPlaying[i].img_url
         pic.innerHTML = ` <img src="${musicJSON.currentPlaying[i].img_url}" alt="" srcset="" />`;
         // //资源链接
-        progressBar.innerHTML = `<audio src="${musicJSON.currentPlaying[i].source_url}" controls></audio>`;
+        progressBar.innerHTML = `<audio src="${musicJSON.currentPlaying[i].source_url}" controls autoplay anonymous></audio>`;
         console.log(musicJSON.currentPlaying[i].source_url);
       });
     });
