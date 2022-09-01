@@ -37,7 +37,8 @@
           </div>
 
           <!-- 进度条 -->
-          <div class="process-bar"></div>
+          <div class="process-bar">
+          </div>
           <!-- 开始时间 -->
           <div class="start-time">1:20</div>
           <!-- 切歌,收藏 -->
@@ -67,7 +68,7 @@
   <script type="module">
     let pause = document.querySelector("#pause");
     let start = document.querySelector("#start");
-    console.log(musicJSON)
+    console.log(musicJSON);
 
     //暂停音乐
     pause.addEventListener("click", () => {
@@ -116,23 +117,25 @@
     });
 
     //点击播放音乐
-    let title=document.querySelector('.title')
-    let artist=document.querySelector('.sub-title')
-    let pic=document.querySelector('.pic')
+    let title = document.querySelector(".title");
+    let artist = document.querySelector(".sub-title");
+    let pic = document.querySelector(".pic");
     let musicItem = document.querySelectorAll(".music-item");
+    let progressBar = document.querySelector(".process-bar");
     musicItem.forEach((e, i) => {
       musicItem[i].addEventListener("click", () => {
         // //歌名
         // console.log(musicJSON.currentPlaying[i].title)
-        title.innerHTML=musicJSON.currentPlaying[i].title
+        title.innerHTML = musicJSON.currentPlaying[i].title;
         // //歌手名
         // console.log(musicJSON.currentPlaying[i].artist)
-        artist.innerHTML=musicJSON.currentPlaying[i].artist
+        artist.innerHTML = musicJSON.currentPlaying[i].artist;
         //图片链接
         // musicJSON.currentPlaying[i].img_url
-        pic.innerHTML=` <img src="${musicJSON.currentPlaying[i].img_url}" alt="" srcset="" />`
+        pic.innerHTML = ` <img src="${musicJSON.currentPlaying[i].img_url}" alt="" srcset="" />`;
         // //资源链接
-        // console.log(musicJSON.currentPlaying[i].source_url)
+        progressBar.innerHTML = `<audio src="${musicJSON.currentPlaying[i].source_url}" controls></audio>`;
+        console.log(musicJSON.currentPlaying[i].source_url);
       });
     });
   </script>
